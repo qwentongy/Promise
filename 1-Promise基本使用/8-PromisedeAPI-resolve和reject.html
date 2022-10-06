@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = Promise.resolve(521)
+        // 如果传入的参数为非 Promise 类型的对象，则返回结果为成功的Promise对象
+        // 如果传入的参数为 Promise 对象，则参数的结果决定了 resolve 的结果
+        let p2 = Promise.resolve(new Promise((resolve,reject) => {
+            // resolve('成功')
+            reject('失败')
+        }))
+        console.log(p1); // 返回成功的 Promise 对象
+        console.log(p2); // 返回失败的 Promise 对象
+
+        // 此时浏览器报错，是因为p2失败没有回调函数
+        p2.catch(reason => console.log(reason))
+    </script>
+</body>
+</html>

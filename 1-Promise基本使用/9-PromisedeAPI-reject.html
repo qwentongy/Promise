@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = Promise.reject(521)
+        // 如果传入的参数为非 Promise 类型的对象，则返回结果为失败的Promise对象
+        // 如果传入的参数为 成功的 Promise 对象，返回结果为成功的Promise对象，但其状态仍是失败
+        let p2 = Promise.reject(new Promise((resolve,reject) => {
+            resolve('成功')
+        }))
+        console.log(p1);
+        console.log(p2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function main() {
+            // 1.右侧为 Promise 的情况
+            let p = new Promise((resolve,reject) => {
+                // resolve('ok')
+                reject('lose')
+            })
+
+            // 1.右侧为 Promise 的情况 返回值为 Promise 对象返回的值
+            // let result = await p
+            // console.log(result); // ok
+
+            // 2.右侧为其他数据类型，是什么就返回什么
+            // let result = await 20
+            // console.log(result); // 20
+            
+            // 3.若 Promise 失败的情况，则需要try-catch捕获
+            try {
+                let result = await p
+                console.log(result);
+            }catch(e){
+                console.log(e); // lose
+            }
+        }
+
+        main()
+    </script>
+</body>
+</html>

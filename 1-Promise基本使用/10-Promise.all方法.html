@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve,reject) => {
+            resolve('ok')
+        })
+        let p2 = Promise.resolve('ok')
+        let p3 = Promise.resolve('whuok')
+        let p4 = Promise.reject('whuok')
+        const result = Promise.all([p1,p2,p3])
+        console.log(result); // [[Prototype]]: Promise
+                            // [[PromiseState]]: "fulfilled"
+                            // [[PromiseResult]]: Array(3)
+                            // 0: "ok"
+                            // 1: "ok"
+                            // 2: "whuok"
+                            // length: 3
+
+        const result2 = Promise.all([p1,p2,p3,p4])
+        console.log(result2);       // 返回结果为失败的Promise对象，值为第一个失败的Promise值
+                                // Promise {<pending>}
+                                // [[Prototype]]: Promise
+                                // [[PromiseState]]: "rejected"
+                                // [[PromiseResult]]: "whuok"
+    </script>
+</body>
+</html>

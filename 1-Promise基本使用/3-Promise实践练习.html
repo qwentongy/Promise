@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page-header">Promise 封装 AJAX 操作</h2>
+        <button id="btn">点击发送 AJAX</button>
+    </div>
+    <script>
+        const btn = document.querySelector('#btn')
+
+
+        btn.addEventListener('click', function() {
+            // 回调函数形式
+
+            // // 1.创建对象
+            // const xhr = new XMLHttpRequest();
+            // // 2.初始化
+            // xhr.open('Get','http://127.0.0.1:8080');
+            // // 3.发送
+            // xhr.send();
+            // // 4.处理响应结果
+            // xhr.onreadystatechange = function() {
+            //     if(xhr.readyState === 4) {
+            //         // 判断响应状态码
+            //         if(xhr.status >= 200 && xhr.status < 300) {
+            //             // 控制台输出响应体
+            //             console.log(xhr.response);
+            //         } else {
+            //             // 控制台输出响应码
+            //             console.log(xhr.status);
+            //         }
+            //     }
+            // }
+
+
+            // Promise形式
+            const p = new Promise((resolve,reject) => {
+                // 1.创建对象
+            const xhr = new XMLHttpRequest();
+            // 2.初始化
+            xhr.open('Get','http://127.0.0.1:9528');
+            // xhr.open('Get','http://gmall-h5-api.atguigu.cn');
+            // 3.发送
+            xhr.send();
+            // 4.处理响应结果
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    // 判断响应状态码
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        // 控制台输出响应体
+                        // console.log(xhr.response);
+                        resolve(xhr.response)
+                    } else {
+                        // 控制台输出响应码
+                        // console.log(xhr.status);
+                        reject(xhr.status)
+                    }
+                }
+            }
+            })
+
+            p.then(
+                value => console.log(value.data),
+                reason => console.log(reason)
+            )
+        })
+    </script>
+</body>
+</html>
